@@ -1,3 +1,41 @@
 spring:
   application:
     name: repository-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/simulationdb
+    username: dba
+    password: dba
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  liquibase:
+    enabled: true
+    change-log: classpath:db/liquibase-changeLog.xml
+server:
+  port: 8181
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: beans
+  endpoint:
+    health:
+      show-details: always
+      env:
+        show-values: when_authorized
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  pattern:
+    level: "%5p [traceId=%X{traceId}, spanId=%X{spanId}]"
