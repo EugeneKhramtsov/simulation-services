@@ -24,5 +24,18 @@ management:
       probability: 1.0
 
 logging:
+  level:
+    uu.app: debug
+  file:
+    name: logs/processing-service.log
   pattern:
     level: "%5p [traceId=%X{traceId}, spanId=%X{spanId}]"
+
+service:
+  processing:
+    delayMs: 0
+    percentOfFailure: 0
+  connection:
+    repository:
+      host: localhost
+      port: 8181

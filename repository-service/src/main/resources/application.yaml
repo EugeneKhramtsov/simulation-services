@@ -37,5 +37,9 @@ management:
       probability: 1.0
 
 logging:
+  level:
+    uu.app: debug
+  file:
+    name: logs/repository-service.log
   pattern:
     level: "%5p [traceId=%X{traceId}, spanId=%X{spanId}]"
