@@ -25,7 +25,10 @@ public class DataService {
 
     public DataDto saveData(DataDto dto) {
         simulateWork();
-        return client.saveData(dto);
+        DataDto savedDto = client.saveData(dto);
+        log.debug("Saved data with id: {}", savedDto.getId());
+
+        return savedDto;
     }
 
     public DataDto updateData(Long id, DataDto dto) {

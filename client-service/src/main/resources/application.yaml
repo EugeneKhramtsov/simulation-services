@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: client-service
+server:
+  port: 8183
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: beans
+  endpoint:
+    health:
+      show-details: always
+      env:
+        show-values: when_authorized
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  level:
+    uu.app: debug
+  file:
+    name: logs/client-service.log
+  pattern:
+    level: "%5p [traceId=%X{traceId}, spanId=%X{spanId}]"
+
+service:
+  simulation:
+
+  connection:
+    processing:
+      host: localhost
+      port: 8182

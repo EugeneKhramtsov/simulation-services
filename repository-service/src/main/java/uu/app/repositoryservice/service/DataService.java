@@ -1,6 +1,7 @@
 package uu.app.repositoryservice.service;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import uu.app.repositoryservice.dto.DataDto;
 import uu.app.repositoryservice.mapper.DataMapper;
@@ -8,6 +9,7 @@ import uu.app.repositoryservice.repository.DataRepository;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 @AllArgsConstructor
 public class DataService {
@@ -21,7 +23,10 @@ public class DataService {
     }
 
     public DataDto saveData(DataDto dto) {
-        return mapper.map(repository.save(mapper.map(dto)));
+        DataDto savedDto = mapper.map(repository.save(mapper.map(dto)));
+        log.debug("Saved data: {}", savedDto);
+
+        return savedDto;
     }
 
     public DataDto updateData(Long id, DataDto dto) {
