@@ -11,14 +11,25 @@ import uu.app.clientservice.service.SimulationService;
 
 @Slf4j
 @RestController
-@RequestMapping("/simulation/start")
+@RequestMapping("/simulation")
 @AllArgsConstructor
 public class SimulationController {
 
     private final SimulationService service;
 
-    @PostMapping
+    @PostMapping("start")
     public void start(@RequestBody SimulationParameters parameters) {
-        service.simulateClient(parameters);
+        service.init();
+        for (int i = 0; i < parameters.getParallelSimulations(); i++) {
+            service.startSavingData(parameters);
+            service.startReceivingData(parameters);
+            service.startUpdatingData(parameters);
+            service.startDeletingData(parameters);
+        }
+    }
+
+    @PostMapping("stop")
+    public void stop() {
+        service.stopSimulation();
     }
 }

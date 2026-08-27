@@ -1,6 +1,10 @@
 spring:
   application:
     name: client-service
+  task:
+    execution:
+      pool:
+        size: 10
 server:
   port: 8183
 
@@ -32,9 +36,7 @@ logging:
     level: "%5p [traceId=%X{traceId}, spanId=%X{spanId}]"
 
 service:
-  simulation:
-
   connection:
-    processing:
+    processing-service:
       host: localhost
       port: 8182

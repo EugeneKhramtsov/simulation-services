@@ -33,9 +33,9 @@ logging:
 
 service:
   processing:
-    delayMs: 0
-    percentOfFailure: 0
+    delay-ms: 0
+    percent-of-failure: 0
   connection:
-    repository:
+    repository-service:
       host: localhost
       port: 8181

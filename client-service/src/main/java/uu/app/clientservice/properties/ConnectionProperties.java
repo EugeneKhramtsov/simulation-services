@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @Value
 @Builder
-@ConfigurationProperties(prefix = "service.connection.processing")
+@ConfigurationProperties(prefix = "service.connection.processing-service")
 public class ConnectionProperties {
     String host;
     int port;

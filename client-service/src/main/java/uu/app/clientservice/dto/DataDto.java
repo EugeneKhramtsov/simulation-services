@@ -8,6 +8,9 @@ import lombok.Value;
 @Value
 @RequiredArgsConstructor
 public class DataDto {
+
+    public static final DataDto EMPTY_DATA = new DataDto(0L, "", "", 0, 0.0, 0L, "");
+
     Long id;
     String name;
     String description;
