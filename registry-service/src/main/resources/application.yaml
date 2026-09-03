@@ -1,12 +1,8 @@
 spring:
   application:
-    name: client-service
-  task:
-    execution:
-      pool:
-        size: 10
+    name: registry-service
 server:
-  port: 8183
+  port: 8184
 
 management:
   endpoints:
@@ -31,17 +27,6 @@ logging:
   level:
     uu.app: debug
   file:
-    name: logs/client-service.log
+    name: logs/registry-service.log
   pattern:
     level: "%5p [traceId=%X{traceId}, spanId=%X{spanId}]"
-
-service:
-  connection:
-    processing-service:
-      host: localhost
-      port: 8182
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
