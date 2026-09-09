@@ -43,3 +43,7 @@ logging:
     name: logs/repository-service.log
   pattern:
     level: "%5p [traceId=%X{traceId}, spanId=%X{spanId}]"
+
+simulation:
+  delay-ms: 0
+  percent-of-failure: 100

@@ -31,10 +31,11 @@ logging:
   pattern:
     level: "%5p [traceId=%X{traceId}, spanId=%X{spanId}]"
 
+simulation:
+  delay-ms: 0
+  percent-of-failure: 0
+
 service:
-  processing:
-    delay-ms: 0
-    percent-of-failure: 0
   connection:
     repository-service:
       host: localhost

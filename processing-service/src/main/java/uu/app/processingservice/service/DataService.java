@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import uu.app.processingservice.client.RepositoryServiceClient;
 import uu.app.processingservice.dto.DataDto;
-import uu.app.processingservice.properties.ProcessingProperties;
+import uu.app.processingservice.properties.SimulationProperties;
 
 import java.util.Random;
 
@@ -16,7 +16,7 @@ public class DataService {
 
     private final Random random = new Random();
     private final RepositoryServiceClient client;
-    private final ProcessingProperties properties;
+    private final SimulationProperties properties;
 
     public DataDto getData(Long id) {
         simulateWork();
@@ -44,12 +44,14 @@ public class DataService {
     private void simulateWork() {
         int randomRoll = random.nextInt(100);
         if (randomRoll < properties.getPercentOfFailure()) {
-            throw new RuntimeException("Predefined failure occurred with randomRoll = " + randomRoll);
+            throw new RuntimeException("Predefined failure in processing-service occurred with randomRoll = " + randomRoll);
         }
-        try {
-            Thread.sleep(properties.getDelayMs());
-        } catch (InterruptedException e) {
-            log.error("Failed to simulate work", e);
+        if (properties.getDelayMs() > 0) {
+            try {
+                Thread.sleep(properties.getDelayMs());
+            } catch (InterruptedException e) {
+                log.error("Failed to simulate work", e);
+            }
         }
     }
 }

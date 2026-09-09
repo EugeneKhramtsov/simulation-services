@@ -6,10 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestClient;
 import tools.jackson.databind.ObjectMapper;
 import uu.app.processingservice.properties.ConnectionProperties;
-import uu.app.processingservice.properties.ProcessingProperties;
+import uu.app.processingservice.properties.SimulationProperties;
 
 @Configuration
-@EnableConfigurationProperties({ConnectionProperties.class, ProcessingProperties.class})
+@EnableConfigurationProperties({ConnectionProperties.class, SimulationProperties.class})
 public class AppConfiguration {
 
     @Bean
