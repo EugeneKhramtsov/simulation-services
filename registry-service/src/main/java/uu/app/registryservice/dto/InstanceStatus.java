@@ -2,5 +2,9 @@ package uu.app.registryservice.dto;
 
 public enum InstanceStatus {
     UP,
-    DOWN
+    DOWN;
+
+    public boolean isDown() {
+        return this.equals(DOWN);
+    }
 }

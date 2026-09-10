@@ -12,5 +12,5 @@ public class InstanceInfo {
     private int port;
     private String appName;
     private InstanceStatus status;
-
+    private Long timestamp;
 }

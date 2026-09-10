@@ -4,11 +4,11 @@ import lombok.Value;
 import org.springframework.stereotype.Repository;
 import uu.app.registryservice.dto.InstanceInfo;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Value
 @Repository
@@ -25,7 +25,7 @@ public class RegistryRepository {
     }
 
     public List<InstanceInfo> get(String appName) {
-        return Optional.ofNullable(registry.get(appName)).orElse(new ArrayList<>());
+        return Optional.ofNullable(registry.get(appName)).orElse(new CopyOnWriteArrayList<>());
     }
 
     public Map<String, List<InstanceInfo>> getAll() {

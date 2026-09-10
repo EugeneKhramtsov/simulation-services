@@ -30,3 +30,11 @@ logging:
     name: logs/registry-service.log
   pattern:
     level: "%5p [traceId=%X{traceId}, spanId=%X{spanId}]"
+
+service:
+  schedule:
+    cleanup:
+      delay-ms: 30000
+      initial-delay-ms: 15000
+    availability:
+      delay-ms: 30000

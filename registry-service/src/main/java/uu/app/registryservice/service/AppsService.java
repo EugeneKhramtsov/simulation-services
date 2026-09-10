@@ -7,6 +7,7 @@ import uu.app.registryservice.dto.InstanceInfo;
 import uu.app.registryservice.dto.InstanceStatus;
 import uu.app.registryservice.repository.RegistryRepository;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,8 @@ public class AppsService {
 
     public void save(InstanceInfo info) {
         String appName = info.getAppName();
+        info.setStatus(InstanceStatus.UP);
+        info.setTimestamp(Instant.now().toEpochMilli());
         var appInfo = repository.get(appName);
         appInfo.add(info);
         repository.save(appName, appInfo);
@@ -48,6 +51,7 @@ public class AppsService {
         for (InstanceInfo info : appInfo) {
             if (info.getInstanceId().equals(instanceId)) {
                 info.setStatus(status);
+                info.setTimestamp(Instant.now().toEpochMilli());
                 updated = true;
             }
         }
