@@ -6,6 +6,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import uu.app.registryservice.dto.InstanceInfo;
 import uu.app.registryservice.dto.InstanceStatus;
+import uu.app.registryservice.properties.ScheduleProperties;
 import uu.app.registryservice.repository.RegistryRepository;
 
 import java.time.Instant;
@@ -15,9 +16,7 @@ import java.time.Instant;
 @RequiredArgsConstructor
 public class CleanupService {
 
-    // TODO make properties
-    public static final long CLEANUP_THRESHOLD = 60000L;
-    public static final long AVAILABILITY_THRESHOLD = 30000L;
+    private final ScheduleProperties properties;
     private final RegistryRepository repository;
 
     @Scheduled(fixedDelayString = "${service.schedule.cleanup.delay-ms}", initialDelayString = "${service.schedule.cleanup.initial-delay-ms}")
@@ -27,7 +26,7 @@ public class CleanupService {
         for (var it = registry.entrySet().iterator(); it.hasNext(); ) {
             var entry = it.next();
             var infoList = entry.getValue();
-            boolean isDeleted = infoList.removeIf(info -> now - info.getTimestamp() > CLEANUP_THRESHOLD);
+            infoList.removeIf(info -> now - info.getTimestamp() > properties.getDeleteThresholdMs());
             if (entry.getValue().isEmpty()) {
                 it.remove();
                 log.info("Deleted app {} info {}", entry.getKey(),  infoList);
@@ -43,7 +42,7 @@ public class CleanupService {
         for (var entry : registry.entrySet()) {
             var infoList = entry.getValue();
             for (InstanceInfo info : infoList) {
-                if (!info.getStatus().isDown() && now - info.getTimestamp() > AVAILABILITY_THRESHOLD) {
+                if (!info.getStatus().isDown() && now - info.getTimestamp() > properties.getCancelThresholdMs()) {
                     info.setStatus(InstanceStatus.DOWN);
                     log.info("App {} is down {}", info.getAppName(), info);
                 }

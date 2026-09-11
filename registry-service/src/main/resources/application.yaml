@@ -38,3 +38,6 @@ service:
       initial-delay-ms: 15000
     availability:
       delay-ms: 30000
+  cleanup:
+    delete-threshold-ms: 60000
+    cancel-threshold-ms: 30000
