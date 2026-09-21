@@ -19,13 +19,7 @@ public class SimulationController {
 
     @PostMapping("start")
     public void start(@RequestBody SimulationParameters parameters) {
-        service.init();
-        for (int i = 0; i < parameters.getParallelSimulations(); i++) {
-            service.startSavingData(parameters);
-            service.startReceivingData(parameters);
-            service.startUpdatingData(parameters);
-            service.startDeletingData(parameters);
-        }
+        service.startSimulation(parameters);
     }
 
     @PostMapping("stop")
