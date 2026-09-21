@@ -21,7 +21,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
+        include: prometheus, health, info
         exclude: beans
   endpoint:
     health:
@@ -46,4 +46,4 @@ logging:
 
 simulation:
   delay-ms: 0
-  percent-of-failure: 100
+  percent-of-failure: 0

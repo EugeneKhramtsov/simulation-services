@@ -1,5 +1,7 @@
 package uu.app.repositoryservice.controller;
 
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +12,14 @@ import uu.app.repositoryservice.service.DataService;
 @RestController
 @RequestMapping("/simulation/data")
 @AllArgsConstructor
+@Timed("repository-service.DataController.timer")
+@Counted("repository-service.DataController.counter")
 public class DataController {
 
     private final DataService service;
 
+    @Timed("timer.getData")
+    @Counted("counter.getData")
     @GetMapping
     public DataDto getData(@RequestParam Long id) {
         return service.getData(id)
