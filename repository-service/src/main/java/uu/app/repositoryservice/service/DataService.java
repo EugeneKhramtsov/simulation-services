@@ -23,8 +23,11 @@ public class DataService {
 
     public Optional<DataDto> getData(Long id) {
         simulateWork();
-        return repository.findById(id)
+        var dto = repository.findById(id)
                 .map(mapper::map);
+        log.debug("Found data: {}, by id: {}", dto.orElse(null), id);
+
+        return dto;
     }
 
     public DataDto saveData(DataDto dto) {
@@ -37,7 +40,7 @@ public class DataService {
 
     public DataDto updateData(Long id, DataDto dto) {
         simulateWork();
-        return repository.findById(id)
+        DataDto updatedDto = repository.findById(id)
                 .map(e -> {
                     e.setName(dto.getName());
                     e.setDescription(dto.getDescription());
@@ -50,11 +53,15 @@ public class DataService {
                 .map(repository::save)
                 .map(mapper::map)
                 .orElse(null);
+        log.debug("Updated data: {}, by id: {}", updatedDto, id);
+
+        return updatedDto;
     }
 
     public void deleteData(Long id) {
         simulateWork();
         repository.deleteById(id);
+        log.debug("Deleted data with id: {}", id);
     }
 
     private void simulateWork() {

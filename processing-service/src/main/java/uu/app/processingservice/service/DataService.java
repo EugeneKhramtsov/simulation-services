@@ -20,7 +20,10 @@ public class DataService {
 
     public DataDto getData(Long id) {
         simulateWork();
-        return client.getData(id);
+        DataDto dto = client.getData(id);
+        log.debug("Received data with id: {}", dto.getId());
+
+        return dto;
     }
 
     public DataDto saveData(DataDto dto) {
@@ -33,12 +36,16 @@ public class DataService {
 
     public DataDto updateData(Long id, DataDto dto) {
         simulateWork();
-        return client.updateData(id, dto);
+        DataDto updatedDto =  client.updateData(id, dto);
+        log.debug("Updated data with id: {}", updatedDto.getId());
+
+        return updatedDto;
     }
 
     public void deleteData(Long id) {
         simulateWork();
         client.deleteData(id);
+        log.debug("Deleted data with id: {}", id);
     }
 
     private void simulateWork() {
