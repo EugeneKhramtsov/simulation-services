@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>uu.app</groupId>
 	<artifactId>repository-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${registry-client.version}</version>
 
 	<properties>
 		<java.version>24</java.version>
@@ -22,6 +22,7 @@
 		<maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
 		<postgresql.version>42.7.13</postgresql.version>
 		<micrometer-registry-prometheus.version>1.17.1</micrometer-registry-prometheus.version>
+		<registry-client.version>0.0.1-SNAPSHOT</registry-client.version>
 	</properties>
 
 	<dependencies>
@@ -59,6 +60,11 @@
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
 			<version>${micrometer-registry-prometheus.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>uu.app</groupId>
+			<artifactId>registry-client</artifactId>
+			<version>${registry-client.version}</version>
 		</dependency>
 
 		<dependency>

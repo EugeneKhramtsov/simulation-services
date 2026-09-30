@@ -19,72 +19,53 @@ public class ProcessingServiceClient {
     private final RestClient restClient;
 
     public DataDto getData(Long id) {
-        try {
-            return restClient.get()
-                    .uri(uriBuilder -> uriBuilder.scheme(SCHEME)
-                            .host(properties.getHost())
-                            .port(properties.getPort())
-                            .path(SIMULATION_DATA)
-                            .queryParam("id", id)
-                            .build())
-                    .retrieve()
-                    .body(DataDto.class);
-        } catch (Exception e) {
-            log.error("Exception on http call", e);
-            return DataDto.EMPTY_DATA;
-        }
+        return restClient.get()
+                .uri(uriBuilder -> uriBuilder.scheme(SCHEME)
+                        .host(properties.getHost())
+                        .port(properties.getPort())
+                        .path(SIMULATION_DATA)
+                        .queryParam("id", id)
+                        .build())
+                .retrieve()
+                .body(DataDto.class);
     }
 
     public DataDto saveData(DataDto dto) {
-        try {
-            return restClient.post()
-                    .uri(uriBuilder -> uriBuilder.scheme(SCHEME)
-                            .host(properties.getHost())
-                            .port(properties.getPort())
-                            .path(SIMULATION_DATA)
-                            .build())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .body(dto)
-                    .retrieve()
-                    .body(DataDto.class);
-        } catch (Exception e) {
-            log.error("Exception on http call", e);
-            return DataDto.EMPTY_DATA;
-        }
+        return restClient.post()
+                .uri(uriBuilder -> uriBuilder.scheme(SCHEME)
+                        .host(properties.getHost())
+                        .port(properties.getPort())
+                        .path(SIMULATION_DATA)
+                        .build())
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(dto)
+                .retrieve()
+                .body(DataDto.class);
     }
 
     public DataDto updateData(Long id, DataDto dto) {
-        try {
-            return restClient.put()
-                    .uri(uriBuilder -> uriBuilder.scheme(SCHEME)
-                            .host(properties.getHost())
-                            .port(properties.getPort())
-                            .path(SIMULATION_DATA)
-                            .queryParam("id", id)
-                            .build())
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .body(dto)
-                    .retrieve()
-                    .body(DataDto.class);
-        } catch (Exception e) {
-            log.error("Exception on http call", e);
-            return DataDto.EMPTY_DATA;
-        }
+        return restClient.put()
+                .uri(uriBuilder -> uriBuilder.scheme(SCHEME)
+                        .host(properties.getHost())
+                        .port(properties.getPort())
+                        .path(SIMULATION_DATA)
+                        .queryParam("id", id)
+                        .build())
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(dto)
+                .retrieve()
+                .body(DataDto.class);
     }
 
     public void deleteData(Long id) {
-        try {
-            restClient.delete()
-                    .uri(uriBuilder -> uriBuilder.scheme(SCHEME)
-                            .host(properties.getHost())
-                            .port(properties.getPort())
-                            .path(SIMULATION_DATA)
-                            .queryParam("id", id)
-                            .build())
-                    .retrieve()
-                    .toBodilessEntity();
-        } catch (Exception e) {
-            log.error("Exception on http call", e);
-        }
+        restClient.delete()
+                .uri(uriBuilder -> uriBuilder.scheme(SCHEME)
+                        .host(properties.getHost())
+                        .port(properties.getPort())
+                        .path(SIMULATION_DATA)
+                        .queryParam("id", id)
+                        .build())
+                .retrieve()
+                .toBodilessEntity();
     }
 }

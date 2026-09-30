@@ -1,4 +1,4 @@
-package uu.app.registryclient;
+package uu.app.registryclient.dto;
 
 public enum InstanceStatus {
     UP,

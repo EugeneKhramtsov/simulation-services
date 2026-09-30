@@ -40,3 +40,9 @@ service:
     repository-service:
       host: localhost
       port: 8181
+  ip-address:
+
+registry-service:
+  url: "http://localhost:8184"
+  discovery:
+    enabled: true

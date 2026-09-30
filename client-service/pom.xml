@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>uu.app</groupId>
 	<artifactId>client-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${registry-client.version}</version>
 
 	<properties>
 		<java.version>24</java.version>
@@ -19,6 +19,7 @@
 		<maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
 		<spring-cloud-starter-netflix-eureka-client.version>5.0.2</spring-cloud-starter-netflix-eureka-client.version>
 		<micrometer-registry-prometheus.version>1.17.1</micrometer-registry-prometheus.version>
+		<registry-client.version>0.0.1-SNAPSHOT</registry-client.version>
 	</properties>
 
 	<dependencies>
@@ -41,6 +42,11 @@
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-registry-prometheus</artifactId>
 			<version>${micrometer-registry-prometheus.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>uu.app</groupId>
+			<artifactId>registry-client</artifactId>
+			<version>${registry-client.version}</version>
 		</dependency>
 
 		<dependency>

@@ -40,8 +40,9 @@ service:
     processing-service:
       host: localhost
       port: 8182
+  ip-address:
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+registry-service:
+  url: "http://localhost:8184"
+  discovery:
+    enabled: true
