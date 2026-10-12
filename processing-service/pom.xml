@@ -8,7 +8,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>processing-service</artifactId>
-	<version>${parent.version}</version>
+	<version>${project.parent.version}</version>
 
 	<dependencies>
 		<dependency>
@@ -38,6 +38,10 @@
 		<dependency>
 			<groupId>uu.app</groupId>
 			<artifactId>registry-client</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>uu.app</groupId>
+			<artifactId>load-balancer</artifactId>
 		</dependency>
 
 		<dependency>
@@ -77,6 +81,7 @@
 								<path>
 									<groupId>org.projectlombok</groupId>
 									<artifactId>lombok</artifactId>
+									<version>${lombok.version}</version>
 								</path>
 							</annotationProcessorPaths>
 						</configuration>
@@ -92,6 +97,7 @@
 								<path>
 									<groupId>org.projectlombok</groupId>
 									<artifactId>lombok</artifactId>
+									<version>${lombok.version}</version>
 								</path>
 							</annotationProcessorPaths>
 						</configuration>

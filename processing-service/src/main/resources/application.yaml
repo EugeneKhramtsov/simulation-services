@@ -1,8 +1,11 @@
 spring:
   application:
     name: processing-service
+  profiles:
+    #active: static
+    active: dynamic
 server:
-  port: 8182
+  port: 9131
 
 management:
   endpoints:
@@ -38,11 +41,12 @@ simulation:
 service:
   connection:
     repository-service:
+      name: repository-service
       host: localhost
       port: 8181
   ip-address:
 
 registry-service:
-  url: "http://localhost:8184"
+  url: "http://localhost:9111"
   discovery:
     enabled: true

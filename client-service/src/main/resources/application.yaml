@@ -6,7 +6,7 @@ spring:
       pool:
         size: 10
 server:
-  port: 8183
+  port: 9121
 
 management:
   endpoints:
@@ -39,10 +39,10 @@ service:
   connection:
     processing-service:
       host: localhost
-      port: 8182
+      port: 9132
   ip-address:
 
 registry-service:
-  url: "http://localhost:8184"
+  url: "http://localhost:9111"
   discovery:
     enabled: true

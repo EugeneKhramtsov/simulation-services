@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.client.RestClient;
 import uu.app.registryclient.dto.InstanceInfo;
 import uu.app.registryclient.factory.InstanceInfoFactory;
 import uu.app.registryclient.properties.RegistryServiceProperties;
@@ -22,5 +23,10 @@ public class ClientConfiguration {
     @Bean
     public InstanceInfo instanceInfo(InstanceInfoFactory infoFactory) {
         return infoFactory.getInstanceInfo();
+    }
+
+    @Bean
+    public RestClient restClient(RestClient.Builder restClientBuilder) {
+        return restClientBuilder.build();
     }
 }

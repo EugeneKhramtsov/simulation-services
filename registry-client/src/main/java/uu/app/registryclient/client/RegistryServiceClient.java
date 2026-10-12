@@ -2,6 +2,7 @@ package uu.app.registryclient.client;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
@@ -9,6 +10,7 @@ import uu.app.registryclient.dto.InstanceInfo;
 import uu.app.registryclient.properties.RegistryServiceProperties;
 
 import java.net.URI;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -57,9 +59,22 @@ public class RegistryServiceClient {
                 .uri(uriBuilder -> uriBuilder.scheme(SCHEME)
                         .host(uri.getHost())
                         .port(uri.getPort())
-                        .pathSegment(REGISTRY_APPS, info.getAppName(), info.getInstanceId())
+                        .path(REGISTRY_APPS).path("/" + info.getAppName()).path("/" + info.getInstanceId())
                         .build())
                 .retrieve()
                 .toBodilessEntity();
+    }
+
+    public List<InstanceInfo> getApp(String name) {
+        URI uri = URI.create(properties.getUrl());
+
+        return restClient.get()
+                .uri(uriBuilder -> uriBuilder.scheme(SCHEME)
+                        .host(uri.getHost())
+                        .port(uri.getPort())
+                        .path(REGISTRY_APPS).path("/" + name)
+                        .build())
+                .retrieve()
+                .body(new ParameterizedTypeReference<>() {});
     }
 }

@@ -15,7 +15,7 @@ spring:
     enabled: true
     change-log: classpath:db/liquibase-changeLog.xml
 server:
-  port: 8181
+  port: 9141
 
 management:
   endpoints:
@@ -52,6 +52,6 @@ service:
   ip-address:
 
 registry-service:
-  url: "http://localhost:8184"
+  url: "http://localhost:9111"
   discovery:
     enabled: true

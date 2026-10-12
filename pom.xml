@@ -20,10 +20,11 @@
 		<module>registry-client</module>
 		<module>registry-service</module>
 		<module>repository-service</module>
+		<module>load-balancer</module>
 	</modules>
 
 	<properties>
-		<java.version>24</java.version>
+		<java.version>17</java.version>
 		<mapstruct.version>1.6.3</mapstruct.version>
 		<liquibase.version>5.0.3</liquibase.version>
 		<spring-boot.version>4.1.0</spring-boot.version>
@@ -33,8 +34,10 @@
 		<maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
 		<postgresql.version>42.7.13</postgresql.version>
 		<micrometer-registry-prometheus.version>1.17.1</micrometer-registry-prometheus.version>
-		<registry-client.version>0.0.1-SNAPSHOT</registry-client.version>
 		<spring-cloud-starter-netflix-eureka-client.version>5.0.2</spring-cloud-starter-netflix-eureka-client.version>
+		<caffeine.version>3.2.4</caffeine.version>
+		<registry-client.version>0.0.1-SNAPSHOT</registry-client.version>
+		<load-balancer.version>0.0.1-SNAPSHOT</load-balancer.version>
 	</properties>
 
 	<dependencyManagement>
@@ -60,9 +63,19 @@
 				<version>${spring-boot.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-cache</artifactId>
+				<version>${spring-boot.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 				<version>${spring-cloud.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.ben-manes.caffeine</groupId>
+				<artifactId>caffeine</artifactId>
+				<version>${caffeine.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.liquibase</groupId>
@@ -88,6 +101,11 @@
 				<groupId>uu.app</groupId>
 				<artifactId>registry-client</artifactId>
 				<version>${registry-client.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>uu.app</groupId>
+				<artifactId>load-balancer</artifactId>
+				<version>${load-balancer.version}</version>
 			</dependency>
 
 			<dependency>
