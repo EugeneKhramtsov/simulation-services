@@ -18,19 +18,30 @@ public class AppsService {
 
     private final RegistryRepository repository;
 
-    public void save(InstanceInfo info) {
-        String appName = info.getAppName();
-        info.setStatus(InstanceStatus.UP);
-        info.setTimestamp(Instant.now().toEpochMilli());
+    public void save(InstanceInfo newInfo) {
+        String appName = newInfo.getAppName();
+        newInfo.setStatus(InstanceStatus.UP);
+        newInfo.setTimestamp(Instant.now().toEpochMilli());
         var appInfo = repository.get(appName);
-        appInfo.add(info);
+        for (InstanceInfo info : appInfo) {
+            if (info.getInstanceId().equals(newInfo.getInstanceId())) {
+                updateStatus(appName, newInfo.getInstanceId(), InstanceStatus.UP);
+                log.info("Instance already registered, updating, serviceInfo: {}", newInfo);
+                return;
+            }
+        }
+        appInfo.add(newInfo);
         repository.save(appName, appInfo);
+        log.info("New instance registered, serviceInfo: {}", newInfo);
     }
 
     public void update(InstanceInfo info) {
         String appName = info.getAppName();
         String instanceId = info.getInstanceId();
-        updateStatus(appName, instanceId, InstanceStatus.UP);
+        boolean isUpdated = updateStatus(appName, instanceId, InstanceStatus.UP);
+        if (!isUpdated) {
+            save(info);
+        }
     }
 
     public List<InstanceInfo> get(String appName) {
@@ -53,6 +64,7 @@ public class AppsService {
                 info.setStatus(status);
                 info.setTimestamp(Instant.now().toEpochMilli());
                 updated = true;
+                log.info("Instance status updated, instanceId: {}", instanceId);
             }
         }
         if (!updated)
