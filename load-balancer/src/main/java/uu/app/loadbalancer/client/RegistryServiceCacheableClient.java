@@ -14,7 +14,7 @@ public class RegistryServiceCacheableClient {
 
     public final RegistryServiceClient registryServiceClient;
 
-    @Cacheable
+    @Cacheable("apps-cache")
     public List<InstanceInfo> getApp(String name) {
         return registryServiceClient.getApp(name);
     }

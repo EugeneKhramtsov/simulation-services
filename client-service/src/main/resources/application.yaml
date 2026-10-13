@@ -1,6 +1,9 @@
 spring:
   application:
     name: client-service
+  profiles:
+    #active: static
+    active: dynamic
   task:
     execution:
       pool:
@@ -38,6 +41,7 @@ logging:
 service:
   connection:
     processing-service:
+      name: processing-service
       host: localhost
       port: 9132
   ip-address:

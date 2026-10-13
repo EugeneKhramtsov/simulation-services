@@ -31,6 +31,10 @@
 			<groupId>uu.app</groupId>
 			<artifactId>registry-client</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>uu.app</groupId>
+			<artifactId>load-balancer</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>

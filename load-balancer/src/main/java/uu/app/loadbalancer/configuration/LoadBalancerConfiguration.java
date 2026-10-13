@@ -4,12 +4,14 @@ import com.github.benmanes.caffeine.cache.Caffeine;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBooleanProperty;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 import java.util.concurrent.TimeUnit;
 
+@EnableCaching
 @AutoConfiguration
 @ConditionalOnBooleanProperty("registry-service.discovery.enabled")
 @ComponentScan(basePackages = "uu.app.loadbalancer")

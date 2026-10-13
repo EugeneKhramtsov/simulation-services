@@ -31,6 +31,7 @@ public class AppsController {
 
     @GetMapping("{appName}")
     public List<InstanceInfo> get(@PathVariable String appName) {
+        log.info("Sending instance info for {}", appName);
         return service.get(appName);
     }
 

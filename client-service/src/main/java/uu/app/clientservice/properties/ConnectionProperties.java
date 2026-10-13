@@ -8,6 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Builder
 @ConfigurationProperties(prefix = "service.connection.processing-service")
 public class ConnectionProperties {
+    String name;
     String host;
     int port;
 }
